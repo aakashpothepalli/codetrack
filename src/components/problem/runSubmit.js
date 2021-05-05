@@ -70,7 +70,9 @@ const RunSubmit = ({ id, getSampleInputsOutputs, setOutputAtParent,isIDE}) => {
     setCompiling(true)
 
     let promises = []
-
+    if(sampleTestInputs.length==0){
+      sampleTestInputs.push("")
+    }
     for (let i in sampleTestInputs) {
       promises.push( 
         axios.post("/runcode", {
