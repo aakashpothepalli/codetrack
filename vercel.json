@@ -1,0 +1,17 @@
+{
+    "routes":[
+      {
+        "src":"/cfparseproblem",
+        "dest":"api/cfparseproblem/index.js"
+      },
+      {
+        "src":"/cfsubmit",
+        "dest":"api/cfsubmit/index.js"
+      },
+      {
+        "src":"/runcode",
+        "dest":"api/runcode/index.js"
+      }
+
+    ]
+}
