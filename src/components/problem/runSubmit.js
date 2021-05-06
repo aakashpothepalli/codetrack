@@ -71,7 +71,7 @@ const RunSubmit = ({ id, getSampleInputsOutputs, setOutputAtParent,isIDE}) => {
 
     let promises = []
     if(sampleTestInputs.length==0){
-      sampleTestInputs.push("")
+      sampleTestInputs =[""]
     }
     for (let i in sampleTestInputs) {
       promises.push( 
