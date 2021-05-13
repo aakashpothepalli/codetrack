@@ -2,7 +2,7 @@ const axios = require('axios');
 module.exports = async function (req, resp) {
 
     var axios = require('axios');
-    var data = {"cmd":`g++ -std=c++14 -O2 -Wall -pedantic -pthread main.cpp && ./a.out << EOF \\n ${req.body.input}`,"src":(req.body.code)};
+    var data = {"cmd":`g++ main.cpp && ./a.out << EOF \\n ${req.body.input}`,"src":(req.body.code)};
     // console.log(process.env.COMPILE_API)
     var config = {
     method: 'post',
