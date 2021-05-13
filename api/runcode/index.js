@@ -1,6 +1,10 @@
 const axios = require('axios');
 module.exports = async function (req, resp) {
 
+    const { exec } = require('child_process');
+    exec('g++',(err,stdout,stderr)=>{
+        console.log(stdout)
+    })
     var axios = require('axios');
     var data = {"cmd":`g++ main.cpp && ./a.out << EOF \\n ${req.body.input}`,"src":(req.body.code)};
     // console.log(process.env.COMPILE_API)
