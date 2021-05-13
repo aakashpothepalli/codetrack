@@ -24,7 +24,7 @@ module.exports = async function (req, resp) {
 
     axios(config,{timeout:2})
     .then(function (response) {
-        console.log((response.data) );
+        // console.log((response.data) );
         resp.send({
             stdout:(response.data).split("\n").slice(1).join("\n"),
             stderr:""
