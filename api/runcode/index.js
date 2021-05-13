@@ -31,7 +31,11 @@ module.exports = async function (req, resp) {
         })
     })
     .catch(function (error) {
-    console.log(error);
+        console.log(error);
+        resp.send({
+            stdout:"error",
+            stderr:JSON.stringify(error.response.data)
+        })
     });
 
     // try {
