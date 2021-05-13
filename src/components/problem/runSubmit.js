@@ -93,6 +93,7 @@ const RunSubmit = ({ id, getSampleInputsOutputs, setOutputAtParent,isIDE}) => {
         }
         else{
           if(isIDE){
+            // console.log(res.data)
             setFinalOutput(ar => [
               ...ar,
                 <div >
