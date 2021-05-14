@@ -4,21 +4,11 @@ module.exports = async function (req, resp) {
 
     try {
       let res = await axios
-          .post("https://glot.io/api/run/cpp/latest", {
-              language: "cpp",
-              source: req.body.code,
-              stdin: req.body.input,
-              args: [],
-              files:[
-                  {
-                      "name":"main.cpp",
-                      "content":req.body.code
-                }
-              ],
-              stdin:req.body.input
+          .post(process.env.COMPILE_API, {
+              code: req.body.code,
+              input: req.body.input,
           },{
               headers:{
-               "Authorization" :process.env.GLOT_API_KEY,
                "Content-type": "application/json"
           }})
           console.log(res.data);
@@ -26,8 +16,8 @@ module.exports = async function (req, resp) {
     } catch (err) {
         if (err.response.status) 
             resp
-                .status(429)
-                .send("To many requests")
+                .status(err.response.status)
+                .send(err.response.data)
         }
 
 }
