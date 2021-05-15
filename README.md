@@ -36,11 +36,6 @@ A lightweight online IDE built for competitive coding.
 | /api/cfparseproblem | GET  |`id` (eg:1152a) |Parses the given Codeforces problem using `id`|
 | /api/runcode        | POST | `{code,input}` |Runs your C++ Code and returns the output|
 
-Note-
-This project uses [glot's](https://glot.io) API key to run the code
-
-Get your API Key from [here](https://glot.io/api) and put it in your .env file
-`GLOT_API_KEY=Token xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
 
 **Give it a 🌟 if you liked it**
 
