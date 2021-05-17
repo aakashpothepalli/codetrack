@@ -76,13 +76,13 @@ const RunSubmit = ({ id, getSampleInputsOutputs, setOutputAtParent,isIDE}) => {
     for (let i in sampleTestInputs) {
       promises.push( 
         axios.post("/runcode", {
-        language: "cpp",
+        // language: "cpp",
         code: code,
         input: sampleTestInputs[i],
         // args: [],
       }).then(res=>{
         console.log(res.data)
-        if (res.data["stderr"] !="") {
+        if (res.data["stderr"] !="" && res.data["stderr"]!=null ) {
           setFinalOutput(ar => [...ar, res.data['stderr']])
         }
         else if(res.data["stdout"]===""){
