@@ -13,7 +13,7 @@ module.exports = async function (req, resp) {
                "Content-type": "application/json"
           }})
           
-          console.log(res.data);
+        //   console.log(res.data);
           if(res.data.status.description=='Compilation Error'){
               let buff = Buffer.from(res.data['compile_output'], 'base64');
               let output = buff.toString();
