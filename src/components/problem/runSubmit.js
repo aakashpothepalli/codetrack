@@ -217,7 +217,15 @@ const RunSubmit = ({ id, getSampleInputsOutputs, setOutputAtParent,isIDE}) => {
   async function onSubmit1() {
     let copy  = require( 'copy-to-clipboard');
     copy(getCode())
-    window.open(`https://codeforces.com/contest/${id.substr(0, id.length - 1)}/submit`, '_blank');
+    let contestID;
+    if(Number.isInteger(id.slice(-1))){
+      
+      contestID =id.substr(0, id.length - 2) 
+    }
+    else{
+      contestID = id.substr(0, id.length - 1)
+    }
+    window.open(`https://codeforces.com/contest/${contestID}/submit`, '_blank');
 
     // submit api is currently down
     // setSubmitting(true)
