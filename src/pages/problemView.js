@@ -93,7 +93,7 @@ let ProblemView = ({
             }}
           >
             {output.map(op => (
-              <div key={Math.random() + "a"}>{op}</div>
+              <div style={{whiteSpace: 'pre'}}key={Math.random() + "a"}>{op}</div>
             ))}
           </div>
         )
