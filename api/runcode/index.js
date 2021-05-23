@@ -15,8 +15,8 @@ module.exports = async function (req, resp) {
           
         //   console.log(res.data);
           if(res.data.status.description=='Compilation Error'){
-              let buff = Buffer.from(res.data['compile_output'], 'base64');
-              let output = buff.toString();
+              let buff = Buffer.from(res.data['compile_output']??"", 'base64');
+              let output = buff.toString('ascii');
               res.data['stderr'] = output;
               
               //   res.data['stderr'] = res.data['compile_output'];
