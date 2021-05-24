@@ -44,7 +44,7 @@ async function getCookie(){
 }
 module.exports = async function (req, resp) {
         console.log('JavaScript HTTP trigger function processed a request.');
-        await getCookie();
+        // await getCookie();
         if (req.query.id) {
             let id = req.query.id;
             let contestId = id.substr(0, id.length - 1);
@@ -75,7 +75,7 @@ module.exports = async function (req, resp) {
                 'sec-fetch-dest': 'document', 
                 'referer': 'https://codeforces.com', 
                 'accept-language': 'en-IN,en;q=0.9', 
-                'cookie': cookie
+                // 'cookie': cookie
                 }
             };
 
