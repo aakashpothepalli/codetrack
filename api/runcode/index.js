@@ -17,7 +17,7 @@ module.exports = async function (req, resp) {
           }})
           
         //   console.log(res.data);
-        res.data['stderr']=decodeURIComponent(escape(atob(res.data['stderr'])))
+        res.data['stderr']=decodeURIComponent(escape(atob(res.data['stderr']||"")))
 
           if(res.data.status.description=='Compilation Error'){
               // let buff = Buffer.from(res.data['compile_output']??"", 'base64');
