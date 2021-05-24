@@ -10,14 +10,16 @@ const IDE = () => {
   let [selectedTab, setSelectedTab] = useState(1)
   let [output, setOutput] = useState([])
   let [isRoughTab,setRoughTab] = useState(false);
-  let [id, setId] = useState("ide"+(typeof window !== `undefined`
-      ? queryString.parse(location.search)["id"]
-      : ""))
+  let [id, setId] = useState("ide")
 
   let [searchSnippet, setSearchSnippet] = useState("")
 
  
-
+  useEffect(() => {
+    console.log(id)
+    console.log(queryString.parse(window?.location?.search||""))
+    setId("ide"+queryString.parse(window?.location?.search||"")["id"])
+  }, [])
   function getSampleInputsOutputs() {
     // console.log(sampleTestInputs)
     return [sampleTestInputs, sampleTestOutputs]

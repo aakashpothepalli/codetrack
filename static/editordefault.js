@@ -25,4 +25,4 @@ int main(){
 }
 
 `;
-export default editorDefault;
+export default {editorDefault};
