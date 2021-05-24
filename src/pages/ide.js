@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import ThemeContext from "./../context/ThemeContext"
 import IDEView from './ideView';
+import queryString from "query-string"
 
 const IDE = () => {
   let [sampleTestInputs, setSampleTestInputs] = useState("")
@@ -9,7 +10,10 @@ const IDE = () => {
   let [selectedTab, setSelectedTab] = useState(1)
   let [output, setOutput] = useState([])
   let [isRoughTab,setRoughTab] = useState(false);
-  let [id, setId] = "ide"
+  let [id, setId] = useState("ide"+(typeof window !== `undefined`
+      ? queryString.parse(location.search)["id"]
+      : ""))
+
   let [searchSnippet, setSearchSnippet] = useState("")
 
  

@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import axios from "axios"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import { useCookies } from "react-cookie"
-import { editorDefault } from "../../../static/editordefault"
+import { editorDefault } from "../../../static/editorDefault"
 import ThemeContext from "./../../context/ThemeContext"
 
 
