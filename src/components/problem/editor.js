@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 
 import { ControlledEditor } from "@monaco-editor/react"
-import {editorDefault} from "../../../static/editorDefault.js"
+import editorDefault from "./editorDefault.js"
 
 function getLocalSavedCode(id) {
   let code = localStorage.getItem(id)

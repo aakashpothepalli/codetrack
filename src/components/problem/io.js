@@ -7,7 +7,7 @@ import axios from "axios"
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {useCookies} from 'react-cookie'
 import {navigate} from 'gatsby'
-import {editorDefault } from '../../../static/editordefault'
+import editorDefault from './editorDefault.js'
 import parse from 'html-react-parser'
  
  const useStyles = makeStyles((theme) => ({

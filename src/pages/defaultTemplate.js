@@ -1,12 +1,12 @@
 import React,{useState,useEffect} from 'react'
 import Layout from '../components/layout'
 import {ControlledEditor} from '@monaco-editor/react'
-import editorDefault from '../../static/editordefault'
+import editorDefault from '../components/problem/editorDefault'
 import SEO from '../components/seo'
 
 
 function getLocalSavedCode(id){
- 
+    console.log(editorDefault)
     let code = localStorage.getItem(id);
     if(code==null)return editorDefault ;
     else return code;
