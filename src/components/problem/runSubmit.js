@@ -104,7 +104,7 @@ const RunSubmit = ({ id, getSampleInputsOutputs, setOutputAtParent,isIDE}) => {
             ])
           }
           else
-          checkOutput(res.data["stdout"],sampleTestOutputs[i])
+          checkOutput(res.data["stdout"],sampleTestOutputs[i],sampleTestInputs[i],i)
         }
       }).catch(err=>{
         if(err?.response?.status==429){
@@ -135,8 +135,8 @@ const RunSubmit = ({ id, getSampleInputsOutputs, setOutputAtParent,isIDE}) => {
     console.log(str)
     return str.replace(/\n/g, " ").trim()
   }
-  function checkOutput(parsedOutput, sampleOutput) {
-    console.log(sampleOutput)
+  function checkOutput(parsedOutput, sampleOutput,sampleInput,ind) {
+    ind = Number(ind)
     if (sanitize(parsedOutput) === sanitize(sampleOutput)) {
       // setOutputList(ar => [...ar, "Test Case passed!"])
       setFinalOutput(ar => [
@@ -144,23 +144,38 @@ const RunSubmit = ({ id, getSampleInputsOutputs, setOutputAtParent,isIDE}) => {
         <p style={{ color: "green" }}>Test Case Passed!</p>,
       ])
     } else {
-      let op = ` Your Output\n ${parsedOutput.toString()}`
-      let exop = ` Expected Output\n ${sampleOutput.toString()}`
+
+      
+      let ip = `Given Input ${ind+1} ${sampleInput.toString()}`
+      let op = ` Your Output ${ind+1}\n ${parsedOutput.toString()}`
+      let exop = ` Expected Output ${ind+1} ${sampleOutput.toString()}`
+      exop = exop.replace(/^\s+|\s+$/g, '');
+      ip = ip.replace(/^\s+|\s+$/g, '');
+      op = op.replace(/^\s+|\s+$/g, '');
+
+      console.log(ip)
+
       // setOutputList(currentArray => [...currentArray, op])
       // setExpectedOutputList(currentArray => [...currentArray, exop])
       setFinalOutput(ar => [
         ...ar,
         <>
-          <div style={{ display: "inline-block" }}>
+          <div>
+          {ip.split("\n").map(str => (
+              <h5 >{str}</h5>
+            ))}
+          </div>
+          <div >
             {op.split("\n").map(str => (
               <h5 >{str}</h5>
             ))}
           </div>
-          <div style={{ marginLeft: 20, display: "inline-block" }}>
+          <div >
             {exop.split("\n").map(str => (
               <h5 >{str}</h5>
             ))}
           </div>
+          <hr/>
         </>,
       ])
     }
