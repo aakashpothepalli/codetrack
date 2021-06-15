@@ -45,8 +45,11 @@ let ProblemView = ({
   selectedTab,
   theme,
   isRoughTab,
-  setRoughTab
+  setRoughTab,
+  setProblemScrollPos,
+  problemScrollPos
 }) => {
+
   function getCodeTab(){
     if(!isRoughTab){
      return (<MyEditor key={id} height="calc(100vh - 131px)" dark={theme?.dark} id={id} />)
@@ -55,16 +58,23 @@ let ProblemView = ({
       return (<MyEditor key ={id+'rough'} height="calc(100vh - 131px)" dark={theme?.dark} id={id+'rough'} />      )
     }
   }
-  
+  const ProblemComponent = React.memo(
+    function problemComponent(){
+      
+      return(<Latex >
+      {parse(cfhtml)}
+    </Latex>)
+    }
+  ,true)
   function getSelectedTab() {
     let component = <div style={{ height: "calc(100vh - 137px)" }}></div>
     switch (selectedTab) {
       case 0:
         component = (
-          <div
+          <div        
             style={{
               fontSize: 15,
-              overflowY: "scroll",
+              // overflowY: "scroll",
               overflowX: "hidden",
               height: "calc(100vh - 137px)",
               color: (theme?.dark) ? "#D4D4D4" : null
@@ -74,60 +84,34 @@ let ProblemView = ({
               <div style={{ margin: "0 auto" }}>
                 <CircularProgress />
               </div>
-            ) : (
-              <Latex>{parse(cfhtml)}</Latex>
-            )}
+            ) : (<ProblemComponent/>)}
           </div>
         )
-        break
-      case 2:
-        component = (
-          <div
-            style={{
-              fontSize: 15,
-              overflowY: "scroll",
-              overflowX: "hidden",
-              height: "calc(100vh - 137px)",
-              color: (theme?.dark) ? "white" : null
-
-            }}
-          >
-            {output.map(op => (
-              <div style={{whiteSpace: 'pre'}}key={Math.random() + "a"}>{op}</div>
-            ))}
-          </div>
-        )
-        break
-      case 1:
-        component = (
-          <div style={{ height: "calc(100vh - 137px)" }}>
+        break;
+        case 1:
+          component = (
+            <div style={{ height: "calc(100vh - 137px)" }}>
             <TextField
               variant="outlined"
               style={{
                 // color: "#E0E0E0",
                 color: (theme?.dark) ? "white" : null
-
+                
               }}
               inputProps={{
                 style: {
                   fontSize: 14,
                   color: (theme?.dark) ? "#D4D4D4" : null,
                   borderColor: (theme?.dark) ? "#D4D4D4" : null
-
+                  
                 },
               }}
               onChange={ev => {
                 let ar = ev.target.value.split(",")
                 console.log(ar)
-                // if (typeof ar == "string") {
-                  // 1 input tc
-                  // setSampleTestInputs(ar)
-                // } else {
-                  //multiple input tcs
-                  setSampleTestInputs(ar)
-                // }
-                // setSampleTestInputs(ev.target.value)
-                // setSampleTestOutputs("")
+                
+                setSampleTestInputs(ar)
+                
               }}
               value={sampleTestInputs}
               fullWidth={true}
@@ -136,7 +120,25 @@ let ProblemView = ({
             />
           </div>
         )
-        break
+        break;
+        case 2:
+          component = (
+            <div
+              style={{
+                fontSize: 15,
+                overflowY: "scroll",
+                overflowX: "hidden",
+                height: "calc(100vh - 137px)",
+                color: (theme?.dark) ? "white" : null
+  
+              }}
+            >
+              {output.map((op,ind) => (
+                <div style={{whiteSpace: 'pre'}}key={ind }>{op}</div>
+              ))}
+            </div>
+          )
+          break;
       case 3:
         component = (
           <div style={{ height: "calc(100vh - 137px)" }}>
@@ -171,7 +173,7 @@ let ProblemView = ({
           </div>
         )
       default:
-        break
+        break;
     }
     return component
   }
@@ -214,7 +216,7 @@ let ProblemView = ({
                       }}
                       onClick={() => {
                         setSelectedTab(0)
-                        refreshLatex()
+                        // refreshLatex()
                       }}
                     >
                       <DescriptionIcon

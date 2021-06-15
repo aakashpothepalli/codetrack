@@ -13,6 +13,7 @@ const Problem = ({ location }) => {
   let [selectedTab, setSelectedTab] = useState(0)
   let [output, setOutput] = useState([])
   let [isRoughTab,setRoughTab] = useState(false);
+  let [problemScrollPos,setProblemScrollPos] = useState(52)
   let [id, setId] = useState(
     typeof window !== `undefined`
       ? queryString.parse(location.search)["id"]
@@ -98,6 +99,8 @@ const Problem = ({ location }) => {
           setOutputAtParent={setOutputAtParent}
           isRoughTab={isRoughTab}
           setRoughTab={setRoughTab}
+          problemScrollPos={problemScrollPos}
+          setProblemScrollPos = {setProblemScrollPos}
         />
       )}
     </ThemeContext.Consumer>

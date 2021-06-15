@@ -218,7 +218,7 @@ const RunSubmit = ({ id, getSampleInputsOutputs, setOutputAtParent,isIDE}) => {
     let copy  = require( 'copy-to-clipboard');
     copy(getCode())
     let contestID;
-    if(Number.isInteger(id.slice(-1))){
+    if(/^[0-9]$/.test(id[id.length-1])){
       
       contestID =id.substr(0, id.length - 2) 
     }
