@@ -133,9 +133,7 @@ let ProblemView = ({
   
               }}
             >
-              {output.map((op,ind) => (
-                <div style={{whiteSpace: 'pre'}}key={ind }>{op}</div>
-              ))}
+              {(output.map(el=>el))}
             </div>
           )
           break;

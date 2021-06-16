@@ -145,36 +145,42 @@ const RunSubmit = ({ id, getSampleInputsOutputs, setOutputAtParent,isIDE}) => {
       ])
     } else {
 
-      
-      let ip = `Given Input ${ind+1} ${sampleInput.toString()}`
-      let op = ` Your Output ${ind+1}\n ${parsedOutput.toString()}`
-      let exop = ` Expected Output ${ind+1} ${sampleOutput.toString()}`
-      exop = exop.replace(/^\s+|\s+$/g, '');
-      ip = ip.replace(/^\s+|\s+$/g, '');
-      op = op.replace(/^\s+|\s+$/g, '');
+      let smpleip = '\n'+sampleInput.toString().replace(/^\s+|\s+$/g, '')+'\n';
+      let pop = '\n'+ parsedOutput.toString().replace(/^\s+|\s+$/g, '')+'\n';
+      let exopstr = '\n'+sampleOutput.toString().replace(/^\s+|\s+$/g, '')+'\n';
 
-      console.log(ip)
-
-      // setOutputList(currentArray => [...currentArray, op])
-      // setExpectedOutputList(currentArray => [...currentArray, exop])
+      const codecss = {
+        display:'block',
+        whiteSpace:'pre-wrap',
+        paddingLeft:20,
+        paddingRight:20,
+        lineHeight:1.5
+      }
       setFinalOutput(ar => [
         ...ar,
         <>
-          <div>
-          {ip.split("\n").map(str => (
-              <h5 >{str}</h5>
-            ))}
-          </div>
-          <div >
-            {op.split("\n").map(str => (
-              <h5 >{str}</h5>
-            ))}
-          </div>
-          <div >
-            {exop.split("\n").map(str => (
-              <h5 >{str}</h5>
-            ))}
-          </div>
+           <div style={{width:"95%"}}>
+            Input ({ind+1})
+             <code style={codecss}>
+               {smpleip}
+             </code>
+           </div>
+          <br/><br/>
+           <div style={{width:"95%"}}>
+            Your Output ({ind+1})
+             <code style={codecss}>
+               {pop}
+             </code>
+           </div>
+        <br/><br/>
+           <div style={{width:"95%"}}>
+            Expected Output ({ind+1})
+            <br/>
+             <code style={codecss} >
+               {exopstr}
+             </code>
+           </div>
+          <br/>
           <hr/>
         </>,
       ])
