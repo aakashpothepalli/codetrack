@@ -83,7 +83,14 @@ const RunSubmit = ({ id, getSampleInputsOutputs, setOutputAtParent,isIDE}) => {
       }).then(res=>{
         console.log(res.data)
         if (res.data["stderr"] !="" && res.data["stderr"]!=null ) {
-          setFinalOutput(ar => [...ar, res.data['stderr']])
+          setFinalOutput(ar => [...ar, (
+          <div style={{
+            display:'block',
+            whiteSpace:'pre-wrap',    
+          }}>
+            {res.data['stderr']}
+          </div>
+          ) ])
         }
         else if(res.data["stdout"]===""){
           setFinalOutput(ar => [

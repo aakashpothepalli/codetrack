@@ -23,8 +23,8 @@ module.exports = {
         name: `Codetrack`,
         short_name: `starter`,
         start_url: `/`,
-        background_color: `#4285F4`,
-        theme_color: `#4285F4`,
+        background_color: `#1E1E1E`,
+        theme_color: `#FFFFFF`,
         display: `minimal-ui`,
         icon: `src/images/icon.png`, // This path is relative to the root of the site.
       },
