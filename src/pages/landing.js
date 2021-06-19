@@ -23,6 +23,7 @@ export default function Landing(theme) {
           variant="outlined"
           label="Problem ID"
           value={id}
+          inputRef={input => input && input.focus()}
           onKeyDown={e => {
             if (e.keyCode === 13) {
               navigate(`problem/?id=${id}`)

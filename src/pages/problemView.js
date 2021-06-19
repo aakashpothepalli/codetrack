@@ -27,7 +27,7 @@ import parse from "html-react-parser"
 import Snippet from "./../components/problem/snippet"
 import Box from "@material-ui/core/Box"
 import SubmissionFooter from "./../components/problem/submissionfooter"
-
+import StressTest from "./../components/problem/stressTest"
 let ProblemView = ({
   id,
   isLoading,
@@ -58,118 +58,121 @@ let ProblemView = ({
       return (<MyEditor key ={id+'rough'} height="calc(100vh - 131px)" dark={theme?.dark} id={id+'rough'} />      )
     }
   }
-  const ProblemComponent = React.memo(
-    function problemComponent(){
-      
-      return(<Latex >
+ 
+
+  let ProblemComponent = (<div        
+    style={{
+      fontSize: 15,
+      // overflowY: "scroll",
+      overflowX: "hidden",
+      height: "calc(100vh - 137px)",
+      color: (theme?.dark) ? "#D4D4D4" : null
+    }}
+  >
+    {isLoading ? (
+      <div style={{ margin: "0 auto" }}>
+        <CircularProgress />
+      </div>
+    ) : (<Latex >
       {parse(cfhtml)}
-    </Latex>)
-    }
-  ,true)
+    </Latex>)}
+  </div>) 
+
+  let InputComponent =  (
+    <div style={{ height: "calc(100vh - 137px)" ,overflowY:'scroll'}}>
+    <TextField
+      variant="outlined"
+      style={{
+        // color: "#E0E0E0",
+        color: (theme?.dark) ? "white" : null
+        
+      }}
+      inputProps={{
+        style: {
+          fontSize: 14,
+          color: (theme?.dark) ? "#D4D4D4" : null,
+          borderColor: (theme?.dark) ? "#D4D4D4" : null
+          
+        },
+      }}
+      onChange={ev => {
+        let ar = ev.target.value.split(",")
+        console.log(ar)
+        
+        setSampleTestInputs(ar)
+        
+      }}
+      value={sampleTestInputs}
+      fullWidth={true}
+      rows={10}
+      multiline={true}
+    />
+    <StressTest dark={theme?.dark} onGetRandomTests={(ar)=>{
+          console.log(ar)
+                  setSampleTestInputs(ar)
+        }}/>
+  </div>)
+  let OutputComponent = (
+    <div
+      style={{
+        fontSize: 15,
+        overflowY: "scroll",
+        overflowX: "hidden",
+        height: "calc(100vh - 137px)",
+        color: (theme?.dark) ? "white" : null
+
+      }}
+    >
+      {(output.map(el=>el))}
+    </div>
+  )
+    let SnippetsComponent = (
+      <div style={{ height: "calc(100vh - 137px)" }}>
+        <TextField
+          variant="outlined"
+          style={{
+            color: "#E0E0E0",
+          }}
+          inputProps={{
+            style: {
+              // marginTop:10,
+              color: theme?.dark ? "#D4D4D4" : "#455A64",
+
+              fontSize: 14,
+            },
+
+          }}
+          InputLabelProps={{
+            style: {
+              color: (theme?.dark) ? "#D4D4D4" : null
+
+            }
+          }}
+          onChange={ev => {
+            setSearchSnippet(ev.target.value)
+          }}
+          value={searchSnippet}
+          fullWidth={true}
+          label="Search for snippets"
+        />
+        <Snippet search={searchSnippet} />
+      </div>
+    )
+
   function getSelectedTab() {
     let component = <div style={{ height: "calc(100vh - 137px)" }}></div>
     switch (selectedTab) {
       case 0:
-        component = (
-          <div        
-            style={{
-              fontSize: 15,
-              // overflowY: "scroll",
-              overflowX: "hidden",
-              height: "calc(100vh - 137px)",
-              color: (theme?.dark) ? "#D4D4D4" : null
-            }}
-          >
-            {isLoading ? (
-              <div style={{ margin: "0 auto" }}>
-                <CircularProgress />
-              </div>
-            ) : (<ProblemComponent/>)}
-          </div>
-        )
+          component = ProblemComponent
         break;
         case 1:
-          component = (
-            <div style={{ height: "calc(100vh - 137px)" }}>
-            <TextField
-              variant="outlined"
-              style={{
-                // color: "#E0E0E0",
-                color: (theme?.dark) ? "white" : null
-                
-              }}
-              inputProps={{
-                style: {
-                  fontSize: 14,
-                  color: (theme?.dark) ? "#D4D4D4" : null,
-                  borderColor: (theme?.dark) ? "#D4D4D4" : null
-                  
-                },
-              }}
-              onChange={ev => {
-                let ar = ev.target.value.split(",")
-                console.log(ar)
-                
-                setSampleTestInputs(ar)
-                
-              }}
-              value={sampleTestInputs}
-              fullWidth={true}
-              rows={10}
-              multiline={true}
-            />
-          </div>
-        )
+          component = InputComponent
         break;
         case 2:
-          component = (
-            <div
-              style={{
-                fontSize: 15,
-                overflowY: "scroll",
-                overflowX: "hidden",
-                height: "calc(100vh - 137px)",
-                color: (theme?.dark) ? "white" : null
-  
-              }}
-            >
-              {(output.map(el=>el))}
-            </div>
-          )
+          component = OutputComponent
           break;
       case 3:
-        component = (
-          <div style={{ height: "calc(100vh - 137px)" }}>
-            <TextField
-              variant="outlined"
-              style={{
-                color: "#E0E0E0",
-              }}
-              inputProps={{
-                style: {
-                  // marginTop:10,
-                  color: theme?.dark ? "#D4D4D4" : "#455A64",
-
-                  fontSize: 14,
-                },
-
-              }}
-              InputLabelProps={{
-                style: {
-                  color: (theme?.dark) ? "#D4D4D4" : null
-
-                }
-              }}
-              onChange={ev => {
-                setSearchSnippet(ev.target.value)
-              }}
-              value={searchSnippet}
-              fullWidth={true}
-              label="Search for snippets"
-            />
-            <Snippet search={searchSnippet} />
-          </div>
-        )
+        component = SnippetsComponent
       default:
         break;
     }

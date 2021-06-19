@@ -11,6 +11,7 @@ import Box from "@material-ui/core/Box"
 import Brightness4Icon from "@material-ui/icons/Brightness4"
 import Brightness7Icon from "@material-ui/icons/Brightness7"
 import ThemeContext from "../context/ThemeContext"
+import StressTest from './problem/stressTest';
 
 const Header = ({ siteTitle, height, minWidth }) => {
   let [dark,setDark] = useState(false)
@@ -92,6 +93,7 @@ const Header = ({ siteTitle, height, minWidth }) => {
               <Link className={classes.menuOptions} to="/ide">
                 IDE
               </Link>
+              {/* <StressTest dark={theme?.dark}/> */}
 
               <div style={{ flexGrow: 1 }}></div>
 

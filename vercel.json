@@ -11,6 +11,10 @@
       {
         "src":"/runcode",
         "dest":"api/runcode/index.js"
+      },
+      {
+        "src":"/stresstest",
+        "dest":"api/stressTest/index.js"
       }
 
     ]
