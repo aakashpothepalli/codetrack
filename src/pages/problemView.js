@@ -74,7 +74,7 @@ let ProblemView = ({
         <CircularProgress />
       </div>
     ) : (<Latex >
-      {parse(cfhtml)}
+      {parse(cfhtml||"")}
     </Latex>)}
   </div>) 
 
@@ -123,7 +123,7 @@ let ProblemView = ({
 
       }}
     >
-      {(output.map(el=>el))}
+      {(output?.map(el=>el)||"")}
     </div>
   )
     let SnippetsComponent = (

@@ -348,5 +348,38 @@ bool miller(long long n){
     return true;
 }
         `
+    },
+    {tags:'dfs graph connected components',
+    code:`
+unordered_map<int,int> vis;
+unordered_map<int,set<int>> g;
+
+void dfs(int i ){
+    vis[i]  = true;
+    for(int el: g[i]){
+        if(!vis[el]){
+            dfs(el);
+        }
     }
+}
+int main(){
+    int n,m;
+    cin>>n>>m;
+
+    for(int i = 0; i<m;i++){
+        int a ,b;cin>>a>>b;
+        g[a].insert(b);
+        g[b].insert(a);
+    }
+
+    int cc = 0; 
+    for(int i =1 ;i<=n;i++){
+        if(!vis[i]){
+            dfs(i);
+            cc++;
+        }
+    }
+}    
+    `    
+}
 ]
