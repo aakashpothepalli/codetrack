@@ -381,5 +381,70 @@ int main(){
     }
 }    
     `    
+},{
+    tags:"union find disjoint set DSU",
+    code:`
+int parent[500001];
+int find( int i){
+    if (parent[i] != i)
+        return parent[i] =find(parent[i]);
+    return i;
+}
+void make_set(int v) {
+    parent[v] = v;
+}
+void Union(int a, int b) {
+    a = find(a);
+    b = find(b);
+    if (a != b)
+        parent[b] = a;
+}
+int main(){
+    fori(i,0,5*1e5+1){
+        parent[i] =i;
+    }
+}
+`
+    },
+    {
+    tags:"diameter / height of tree ",
+    code:`
+// diameter / height of tree
+unordered_map<int,set<int>> g;
+int dp[100001]; // dp[i] = diameter of the subtree with root [i]
+int dfs(int i,int par ){
+    int height = 1;
+    vector<int> ar;
+    for(int el : g[i]){
+        if(par==el)continue;
+        int a = dfs(el,i);
+        height  = max(height,1 + a);
+        ar.push_back(a);
+    }
+    sort(all(ar));
+    if(ar.size()>=2){
+        int diameter = ar[ar.size()-1] + ar[ar.size()-2] +1 ;
+        dp[i] = dia;
+    }
+    else if(ar.size()==1){
+        dp[i] = ar[0]+1;
+    }
+    return  height;
+}
+int main(){
+    int n,m;cin>>n>>m;
+
+    while(m--){
+        int a , b;cin>>a>>b;
+        g[a].insert(b);
+        g[b].insert(a);
+    }
+
+    int ans = dfs(1,-1);
+    int mx = 0;
+    fori(i,0,n+1)mx = max(mx,dp[i]);
+    cout<<mx-1<<endl;
+}
+`
 }
 ]
