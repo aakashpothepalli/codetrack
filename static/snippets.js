@@ -409,9 +409,9 @@ int main(){
     {
     tags:"diameter / height of tree ",
     code:`
-// diameter / height of tree
+// diameter of tree , height of tree
 unordered_map<int,set<int>> g;
-int dp[100001]; // dp[i] = diameter of the subtree with root [i]
+int dp[200001]; // dp[i] = diameter of the subtree with root [i]
 int dfs(int i,int par ){
     int height = 1;
     vector<int> ar;
@@ -424,7 +424,7 @@ int dfs(int i,int par ){
     sort(all(ar));
     if(ar.size()>=2){
         int diameter = ar[ar.size()-1] + ar[ar.size()-2] +1 ;
-        dp[i] = dia;
+        dp[i] = diameter;
     }
     else if(ar.size()==1){
         dp[i] = ar[0]+1;
@@ -432,8 +432,8 @@ int dfs(int i,int par ){
     return  height;
 }
 int main(){
-    int n,m;cin>>n>>m;
-
+    int n;cin>>n;
+    int m = n-1;
     while(m--){
         int a , b;cin>>a>>b;
         g[a].insert(b);
@@ -443,7 +443,7 @@ int main(){
     int ans = dfs(1,-1);
     int mx = 0;
     fori(i,0,n+1)mx = max(mx,dp[i]);
-    cout<<mx-1<<endl;
+    cout<<(mx==0?0:mx-1)<<endl;
 }
 `
 }
