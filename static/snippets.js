@@ -446,5 +446,21 @@ int main(){
     cout<<(mx==0?0:mx-1)<<endl;
 }
 `
+},
+{
+    tags:"random array generator",
+    code:`
+// random array generator
+vector<int> randAr(int seed,int size){
+    srand(seed);
+    vector<int> ar;
+    for(int i=0;i<size;i++){
+      int ran = rand()%size;
+      ar.push_back(ran);
+    }
+    return ar;
+ 
+ }
+ `
 }
 ]
