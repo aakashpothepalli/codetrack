@@ -217,7 +217,7 @@ let ProblemView = ({
                       }}
                       onClick={() => {
                         setSelectedTab(0)
-                        // refreshLatex()
+                        refreshLatex()
                       }}
                     >
                       <DescriptionIcon

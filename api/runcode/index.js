@@ -10,7 +10,7 @@ module.exports = async function (req, resp) {
           .post(process.env.COMPILE_API, {
             source_code: btoa(req.body.code),
             stdin:btoa(req.body.input),
-            'compiler_options':'-D_GLIBCXX_DEBUG',
+            'compiler_options':'-D_GLIBCXX_DEBUG -std=c++17 -O2 -Wall -Wextra -Wshadow -Wconversion -Wfloat-equal -Wduplicated-cond -Wlogical-op',
             "language_id":54
           },{
               headers:{
