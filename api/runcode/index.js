@@ -7,32 +7,29 @@ module.exports = async function (req, resp) {
     // let code = Buffer.from(req.body.code).toString('base64')
     try {
       let res = await axios
-          .post(process.env.COMPILE_API, {
-            source_code: btoa(req.body.code),
-            stdin:btoa(req.body.input),
-            'compiler_options':'-D_GLIBCXX_DEBUG -std=c++17 -O2 -Wall -Wextra -Wshadow -Wconversion -Wfloat-equal -Wduplicated-cond -Wlogical-op',
-            "language_id":54
+          .post(process.env.COMPILE_API,{
+            "sourceCode": req.body.code,
+            "filename": "main.cpp",
+            "language": "cpp",
+            "input": req.body.input,
+            'compilerOptions':'-D_GLIBCXX_DEBUG -std=c++17 -O2 -Wall -Wextra -Wshadow -Wconversion -Wfloat-equal -Wduplicated-cond -Wlogical-op',
           },{
               headers:{
                "Content-type": "application/json"
           }})
           
         //   console.log(res.data);
-        res.data['stderr']=decodeURIComponent(escape(atob(res.data['stderr']||"")))
-
-          if(res.data.status.description=='Compilation Error'){
-              // let buff = Buffer.from(res.data['compile_output']??"", 'base64');
-              // let output = buff.toString('ascii');
-              res.data['stderr'] = decodeURIComponent(escape(atob(res.data['compile_output'])));
-              console.log("compile error",res.data['stderr'])
-              
-              //   res.data['stderr'] = res.data['compile_output'];
-              delete res.data.compile_output
-          }
-          else if(res.data.status.description=='Time Limit Exceeded'){
-              res.data['stderr'] = "Time Limit Exceeded"
+        if(res.data['status']=='compile_error'){
+            res.data['stderr']=res.data['message']
         }
-        res.data['stdout']  = atob(res.data['stdout']??"",'base64');
+        else if(res.data['status']=='time_limit_exceeded'){
+            res.data['stderr']="Time Limit Exceeded"
+        }  
+        else if(res.data['status']=='runtime_error'){
+          res.data['stderr']=res.data['stderr']
+
+        }
+        res.data['stdout']  = (res.data['stdout']);
           resp.send(res.data);
     } catch (err) {
         console.log(err)

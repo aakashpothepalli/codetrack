@@ -15,9 +15,13 @@ function getLocalSavedCode(id) {
       if(id.search('rough')!=-1){
         console.log('rough')
       }
-      else 
-      return localStorage.getItem("defaultTemplate")
-    }
+      else {
+        if(id.contains("rough")){
+          return "";
+        }
+        return localStorage.getItem("defaultTemplate")
+      }
+  }
   } else return code
 }
 
